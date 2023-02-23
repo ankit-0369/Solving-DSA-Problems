@@ -1,0 +1,42 @@
+class Solution {
+private:
+bool ispossible(vector<int>& weights, int d, int m){
+    int cur=0;
+    int k=1;
+    for(int i=0; i<weights.size(); i++){
+        if(cur+ weights[i]<=m){
+            cur+= weights[i];
+        }else{
+            k++;
+          if(k>d || weights[i]>m){
+            return false;
+        }
+        cur=weights[i];
+          
+        }
+       
+    }
+    return true;
+}
+public:
+    int shipWithinDays(vector<int>& weights, int d) {
+        int s=0;
+        int e=0;
+        int res= INT_MAX;
+        for(int i=0; i<weights.size(); i++){
+            e+= weights[i];
+        }
+        int m;
+        while(s<=e){
+           m= s+(e-s)/2;
+            if(ispossible(weights,d,m)){
+               res= min(res,m);
+                e= m-1;
+            }else
+            s= m+1;
+            m= s+(e-s)/2;
+        }
+
+        return res;
+    }
+};
