@@ -16,31 +16,6 @@ public:
             i++;
         }
       
-        
-        // sort(nums.begin(), nums.end()); //O(nlogn)
-        // for(int i=0; i+1<n; i++){
-        //     if(nums[i]==nums[i+1]){
-        //         ans= nums[i];
-        //         break;
-        //     }
-        // }
-        //brute force approch
-        //         int res=0;
-        //         bool found= false;
-        // for(int i=0; i<n-1; i++){
-            
-        //     for(int j=i+1; j<n; j++){
-        //             if(nums[i]==nums[j]){
-        //                 res= nums[i];
-        //                 found= true;
-        //                 break;
-        //             }
-        //     }
-        //     if(found){
-        //         break;
-        //     }
-        // }
-
-        return res;
+          return res;
     }
 };
