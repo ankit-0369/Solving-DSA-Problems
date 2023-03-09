@@ -6,6 +6,20 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
+    private:
+    vector<int> remove_duplicates(vector<int> res){
+        
+        vector<int> final;
+        int i;
+          for(i=0; i+1<res.size(); i++){//O(n)
+                  if(res[i]!=res[i+1])
+                  final.push_back(res[i]);
+              }
+                
+              final.push_back(res[i]);
+              
+              return final;
+    }
     public:    
        vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
         {
@@ -13,7 +27,7 @@ class Solution
             int i=0, j=0, k=0;
             vector<int> res;
             vector<int> com;
-            while(i<n1 && j<n2 && k<n3){
+            while(i<n1 && j<n2 && k<n3){ // O(n1+n2+n3)
                 if(a[i]==b[j] ){
 
                     if(a[i]==c[k]){
@@ -42,19 +56,15 @@ class Solution
             // }
          
             //removing duplicates
-              vector<int> final;
+              
               if(res.size()==0){
-                  final.push_back(-1);
-                  return final;
+                  res.push_back(-1);
+                  return res;
               }
-              for(i=0; i+1<res.size(); i++){
-                  if(res[i]!=res[i+1])
-                  final.push_back(res[i]);
-              }
-                
-              final.push_back(res[i]);
+              return remove_duplicates(res);
             
-            return final;
+            
+         
         }
 
 };
