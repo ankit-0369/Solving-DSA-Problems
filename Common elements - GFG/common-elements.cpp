@@ -13,26 +13,33 @@ class Solution
             int i=0, j=0, k=0;
             vector<int> res;
             vector<int> com;
-            while(i<n1 && j<n2){
+            while(i<n1 && j<n2 && k<n3){
                 if(a[i]==b[j] ){
-                    com.push_back(a[i]);
-                    i++, j++;
+
+                    if(a[i]==c[k]){
+                        res.push_back(a[i]);
+                        i++, j++, k++;
+                    }else if(a[i]<c[k]){
+                        i++, j++;
+                    }else
+                    k++;
+                    
                 }else if(a[i]>b[j]){
-                    j++;
+                     j++;
                 }else
-                i++;
+                 i++;
             }
             
-            j=0;
-            while(j<com.size() && k<n3){
-                if(com[j]==c[k]){
-                   res.push_back(com[j]);
-                    j++, k++;
-                }else if(com[j]<c[k]){
-                    j++;
-                }else
-                k++;
-            }
+            // j=0;
+            // while(j<com.size() && k<n3){
+            //     if(com[j]==c[k]){
+            //       res.push_back(com[j]);
+            //         j++, k++;
+            //     }else if(com[j]<c[k]){
+            //         j++;
+            //     }else
+            //     k++;
+            // }
          
             //removing duplicates
               vector<int> final;
