@@ -121,9 +121,9 @@ int solveUsingIteration(string s){
 public:
     int myAtoi(string s) {
 
-         // return solveUsingRecursion(s);
+         return solveUsingRecursion(s);
 
 
-            return solveUsingIteration(s);
+            // return solveUsingIteration(s);
     }
 };
