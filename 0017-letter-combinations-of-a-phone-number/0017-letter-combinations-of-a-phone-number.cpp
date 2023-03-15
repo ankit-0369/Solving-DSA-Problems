@@ -4,7 +4,7 @@ class Solution {
         void solve(string dig, string cur, int i, vector<string> & ans, vector<string> m){
 
             if(i==dig.length()){
-               cout<<cur<<" ";
+             
                 ans.push_back(cur);
                 return;
             }
@@ -23,11 +23,13 @@ class Solution {
 
 public:
     vector<string> letterCombinations(string digits) {
+      
+         vector<string> ans;
         if(digits.length()==0){
 
-            return {};
+            return ans;
         }
-        vector<string> ans;
+       
         string cur;
         vector<string> mapped= {"", "","abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
             int i=0;
