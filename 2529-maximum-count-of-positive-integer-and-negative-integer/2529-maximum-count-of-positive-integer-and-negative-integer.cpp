@@ -32,21 +32,6 @@ int countPositive(vector<int>& nums){
 }
 
     int maximumCount(vector<int>& nums) {
-        /*
-        //naive aproach with O(n) time complexity and o(1) auxilary-space--
-        int pos=0, neg=0;
-        for(int i=0; i<nums.size(); i++){
-            if(nums[i]<0)
-            neg++;
-            else if(nums[i]>0)
-            pos++;
-        }
-
-        return max(pos,neg);
-        */
-        
-        // time-complexity- O(logn) && auxilary-space:- O(1)
-        
         int posIndex=countPositive(nums);
         int negIndex=countNegative(nums);
       
