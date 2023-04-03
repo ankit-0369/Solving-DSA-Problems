@@ -20,17 +20,17 @@ class Solution {
     }
 public:
     int getDecimalValue(ListNode* head) {
-
-        ListNode* temp= head;
+        //t.c:- O(n) & auxilary-space:- O(1)
+        // ListNode* temp= head;
         int res=0;
         int k=getLength(head)-1;
-        while(temp->next!= NULL){
-                int d= temp->val;
+        while(head->next!= NULL){
+                int d= head->val;
                 res+= d*pow(2,k--);
                 
-                temp= temp->next;
+                head= head->next;
         }
-        res+= (temp->val)* pow(2,k--);
+        res+= (head->val)* pow(2,k--);
         return res;
     }
 };
