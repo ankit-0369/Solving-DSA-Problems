@@ -19,10 +19,11 @@ public:
                 carry= sum/10;
                 i--,j--;
         }
-        i=0, j=s.size()-1;
-        while(i<=j){//same can be done with-- reverse(s.begin(),s.end());--
-            swap(s[i++],s[j--]);
-        }
+        // i=0, j=s.size()-1;
+        // while(i<=j){//same can be done with-- reverse(s.begin(),s.end());--
+        //     swap(s[i++],s[j--]);
+        // }
+        reverse(s.begin(),s.end());
     return s;
     }
 };
