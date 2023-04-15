@@ -32,20 +32,35 @@ class Solution {
   public:
     int totalTime(int n, vector<int> &arr, vector<int> &time) {
         // code here ----t.c:- O(nlogn) & O(1)
-        int total=0;
-     sort(arr.begin(),arr.end());
-        for(int i=1; i<n; i++){
-            if(arr[i]==arr[i-1]){
+    int total=0;
+    //  sort(arr.begin(),arr.end());
+    //     for(int i=1; i<n; i++){
+    //         if(arr[i]==arr[i-1]){
                 
-                total+= time[arr[i]-1];
+    //             total+= time[arr[i]-1];
                 
-            }else{
-                total+= 1;
+    //         }else{
+    //             total+= 1;
                 
-            }
-        }
+    //         }
+    //     }
 
-        return total;
+    //     return total;
+    //t.c:- O(n) & auxilary-space:- O(n)
+    int hash[n];
+    for(int i=0; i<n; i++){
+        hash[i]=0;
+    }
+    hash[arr[0]]=1;
+    for(int i=1; i<n; i++){
+        if(hash[arr[i]]==1){
+            total+= time[arr[i]-1];
+        }else{
+            total+=1;
+            hash[arr[i]]=1;
+        }
+    }
+    return total;
     }
 };
 
