@@ -12,7 +12,6 @@ public:
             m= s+(e-s)/2;
         }
         int index= (s+1)%n;
-           
         return min(nums[s],nums[index]);
     }
 };
