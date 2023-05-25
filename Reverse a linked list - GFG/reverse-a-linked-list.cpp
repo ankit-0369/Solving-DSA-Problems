@@ -31,13 +31,9 @@ struct Node
 
 class Solution
 {
-    public:
-    //Function to reverse a linked list.
-    struct Node* reverseList(struct Node *head)
-    {
-        // code here
-        // return head of reversed list
-        Node* prev= NULL;
+    private:
+    Node* iterativeApproach(struct Node* head){
+         Node* prev= NULL;
         Node* cur= head;
         Node* agla= NULL;
         while(cur!= NULL){
@@ -49,6 +45,27 @@ class Solution
         head= prev;
         
         return head;
+    }
+    struct Node* recursiveApproach(struct Node* head){
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+       
+        Node* reversed= recursiveApproach(head->next);
+         head->next->next= head;
+        head->next= NULL;
+        
+        return reversed;
+    }
+    public:
+    //Function to reverse a linked list.
+    struct Node* reverseList(struct Node *head)
+    {
+        // code here
+        // return head of reversed list
+    //   return iterativeApproach(head);
+       
+       return recursiveApproach(head);
     }
     
 };
