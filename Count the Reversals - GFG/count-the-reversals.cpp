@@ -20,7 +20,6 @@ int main()
 int countRev (string s)
 {
     // your code here--
-    //first condn--
     if(s.size() & 1){//odd length of string
         return -1;
     }
@@ -28,19 +27,12 @@ int countRev (string s)
     stack<char> st;
     int cnt=0;
     for(auto ch:s){
-        if(ch=='{'){
-            st.push(ch);
-        }else{
-            if(!st.empty() && st.top()!= '}'){
-                st.pop();
-            }else{
-                st.push(ch);
-            }
-            
-        }
+        if(ch=='}' && (!st.empty() && st.top()=='{')){
+            st.pop();
+        }else
+        st.push(ch);
     }
-    
-    while(!st.empty()){
+     while(!st.empty()){
         char ch1= st.top();
         st.pop();
         char ch2= st.top();
