@@ -43,22 +43,22 @@ queue<int> modifyQueue(queue<int> q, int k) {
         q.pop();
         i++;
     }
-    
-    while(i< len){
-        left.push(q.front());
-        q.pop();
-        i++;
-    }
-    
+
     while(!k_ele.empty()){
+        
         q.push(k_ele.top());
         k_ele.pop();
     }
     
-    while(!left.empty()){
-        q.push(left.front());
-        left.pop();
+ 
+    i=0;
+    while(i<(len-k)){
+        q.push(q.front());
+        q.pop();
+        i++;
+        
     }
+    
     
     return q;
     
