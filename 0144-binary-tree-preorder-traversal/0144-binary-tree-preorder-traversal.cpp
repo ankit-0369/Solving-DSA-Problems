@@ -23,8 +23,23 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         //using recursion--- O(n) and space- O(n)
+        // vector<int> ans;
+        // solve(root, ans);
+        // return ans;
+
         vector<int> ans;
-        solve(root, ans);
+        stack<TreeNode*> st;
+        st.push(root);
+        while(!st.empty()){
+            TreeNode* cur= st.top();
+            st.pop();
+            if(cur){
+                ans.push_back(cur->val);
+                st.push(cur->right);
+                st.push(cur->left);
+
+            }
+        }
         return ans;
     }
 };
