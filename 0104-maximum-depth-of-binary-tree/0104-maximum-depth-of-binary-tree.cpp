@@ -11,32 +11,49 @@
  */
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
-        if(!root)
-            return 0;
-        int h=0;
-        queue<TreeNode*> q;
-        q.push(root);
-        q.push(NULL);
+//     int method1(TreeNode* root){
+//                if(!root)
+//             return 0;
+//         int h=0;
+//         queue<TreeNode*> q;
+//         q.push(root);
+//         q.push(NULL);
         
-        while(!q.empty()){
+//         while(!q.empty()){
             
-            TreeNode* temp= q.front();
-            q.pop();
-            if(temp){
+//             TreeNode* temp= q.front();
+//             q.pop();
+//             if(temp){
 
-                if(temp->left) q.push(temp->left);
+//                 if(temp->left) q.push(temp->left);
                 
-                if(temp->right) q.push(temp->right);
+//                 if(temp->right) q.push(temp->right);
                 
-            }else{
-                h++;
-                if(!q.empty())  //important as we push null to seperate levels if q will empty then no more levels-
-                q.push(NULL);
+//             }else{
+//                 h++;
+//                 if(!q.empty())  //important as we push null to seperate levels if q will empty then no more levels-
+//                 q.push(NULL);
                 
-            }
+//             }
+//         }
+        
+//         return h;
+//     }
+    
+    int solve(TreeNode* root){
+        
+        if(root==NULL) return 0;
+        
+        if(root->left==NULL && root->right==NULL){
+            return 1;
         }
         
-        return h;
+        return max(solve(root->left), solve(root->right)) + 1;
+    }
+    
+    int maxDepth(TreeNode* root) {
+        // return method1();
+        //using recursion---
+        return solve(root);
     }
 };
