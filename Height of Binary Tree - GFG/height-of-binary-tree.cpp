@@ -98,32 +98,18 @@ struct Node
 */
 class Solution{
     public:
+    
+     int solve(Node* root){
+        if(root==NULL) return 0;
+        if(root->left==NULL && root->right==NULL)
+            return 1;
+        
+        return max(solve(root->left), solve(root->right)) + 1;
+    }
     //Function to find the height of a binary tree.
     int height(struct Node* root){
-        // code here ---
-        int h=0;
-        queue<Node*> q;
-        q.push(root);
-        q.push(NULL);
-        while(!q.empty())
-        {
-            Node* temp= q.front();
-            q.pop();
-            if(temp){
-               
-               if(temp->left) q.push(temp->left);
-               
-               if(temp->right) q.push(temp->right);
-               
-            }else{
-                h++;
-                if(!q.empty()){
-                    q.push(NULL);
-                }
-            }
-        }
-        
-        return h;
+        //using recursion---
+         return solve(root);
     }
 };
 
