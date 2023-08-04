@@ -93,21 +93,43 @@ struct Node
 
 class Solution {
     private:
-    int height(Node* root){
-        if(!root) return 0;
-        return max(height(root->left), height(root->right)) +1;
-    }
+    // int height(Node* root){
+    //     if(!root) return 0;
+    //     return max(height(root->left), height(root->right)) +1;
+    // }
   public:
+    pair<int, int> solve(Node* root){
+        if(!root){
+            return {0,0};
+            
+        }
+        
+       pair<int, int> left= solve(root->left);
+       pair<int, int> right= solve(root->right);
+       
+       int op1= left.second;
+       int op2= right.second;
+       int op3= left.first+ right.first+ 1;
+       
+       pair<int,int> val;
+       val.first= max(left.first, right.first)+1;
+       val.second= max(op1, max(op2,op3));
+       
+        return val;
+        
+    }
     // Function to return the diameter of a Binary Tree.
     int diameter(Node* root) {
         // Your code here---
-        if(!root) return 0;
+        // if(!root) return 0;
         
-        int leftD= diameter(root->left);
-        int rightD= diameter(root->right);
-        int both= height(root->left) + height(root->right)+ 1;
+        // int leftD= diameter(root->left);
+        // int rightD= diameter(root->right);
+        // int both= height(root->left) + height(root->right)+ 1;
         
-        return max(leftD, max(rightD, both));
+        // return max(leftD, max(rightD, both));
+        pair<int,int> ans= solve(root);
+        return ans.second;
     }
 };
 
