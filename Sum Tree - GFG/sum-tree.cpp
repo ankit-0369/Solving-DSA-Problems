@@ -95,11 +95,31 @@ struct Node
 class Solution
 {
     private: 
-    int sum(Node* root){
-        if(!root) 
-        return 0;
+    // int sum(Node* root){
+    //     if(!root) 
+    //     return 0;
         
-        return sum(root->left) + sum(root->right) + root->data;
+    //     return sum(root->left) + sum(root->right) + root->data;
+        
+    // }
+    pair<bool, int> solve(Node* root){
+        //base--
+        if(!root){
+            return {true, 0};
+        }
+        if(!root->left && !root->right)
+        return {true, root->data};
+        
+        pair<bool, int>leftAns= solve(root->left);
+        pair<bool, int> rightAns= solve(root->right);
+        pair<bool, int> p;
+        if(leftAns.first && rightAns.first && root->data== leftAns.second+ rightAns.second)
+        p.first= true;
+        else
+        p.first= false;
+        p.second= leftAns.second+ rightAns.second+ root->data;
+        
+        return p;
         
     }
     public:
@@ -107,16 +127,18 @@ class Solution
     {
          // Your code here----
          //naive approach-- use helper fn to find sum of tree
-         if(!root || !root->left && !root->right)
-         return true;
-         bool checkLeft= isSumTree(root->left);
-         bool checkRight= isSumTree(root->right);
+        //  if(!root || !root->left && !root->right)
+        //  return true;
+        //  bool checkLeft= isSumTree(root->left);
+        //  bool checkRight= isSumTree(root->right);
          
-        //  cout<<checkLeft<<" "<<checkRight<<" "<< root->data<<" "<<sum(root->left) + sum(root->right)<<"\n";
-         if(checkLeft && checkRight && root->data== sum(root->left) + sum(root->right))
-         return true;
+        // //  cout<<checkLeft<<" "<<checkRight<<" "<< root->data<<" "<<sum(root->left) + sum(root->right)<<"\n";
+        //  if(checkLeft && checkRight && root->data== sum(root->left) + sum(root->right))
+        //  return true;
          
-         return false;
+        //  return false;
+        
+        solve(root).first;
     }
 };
 
