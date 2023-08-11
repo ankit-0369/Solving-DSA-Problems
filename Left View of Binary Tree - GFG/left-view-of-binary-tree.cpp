@@ -127,11 +127,8 @@ struct Node
 };
  */
 
-//Function to return a list containing elements of left view of the binary tree.
-vector<int> leftView(Node *root)
-{
-   // Your code here---
-   
+vector<int> method1(Node* root){
+     
    if(!root)
    return {};
    queue<pair<Node*, int>> q;
@@ -163,4 +160,29 @@ vector<int> leftView(Node *root)
    }
    
    return ans;
+}
+
+void dfs(Node* root, int lev, vector<int>& ans){
+    if(!root) return;
+    
+    if(lev==ans.size())
+    ans.push_back(root->data);
+    //since left view so first traverse left---
+    dfs(root->left, lev+1, ans);
+    dfs(root->right, lev+1, ans);
+    return;
+}
+
+//Function to return a list containing elements of left view of the binary tree.
+vector<int> leftView(Node *root)
+{
+   // Your code here---
+    // return method1(root);
+    
+    vector<int> ans;
+    int lev= 0;
+    dfs(root, lev, ans);
+    
+    return ans;
+    
 }
