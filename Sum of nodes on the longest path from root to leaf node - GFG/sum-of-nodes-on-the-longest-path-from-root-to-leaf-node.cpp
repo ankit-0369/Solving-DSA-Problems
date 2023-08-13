@@ -119,20 +119,20 @@ class Solution
 public:
     
     void dfs(Node* root, pair<int, int> p, pair<int, int>& ans){
-        if(!root) return;
-        
-        if(!root->left && !root->right){
-           if(p.first+1>ans.first){
-                ans.first= p.first+1;
-               ans.second= p.second+ root->data;
+        if(!root){
+             if(p.first>ans.first){
+                ans.first= p.first;
+               ans.second= p.second;
            
            }
-           if(p.first+1==ans.first){
-                  ans.second= max(ans.second, p.second+root->data);
+           if(p.first==ans.first){
+                  ans.second= max(ans.second, p.second);
            }
            
            return;
         }
+        
+       
         p.first+= 1;
         p.second+= root->data;
         
