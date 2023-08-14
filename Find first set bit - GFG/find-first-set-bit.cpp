@@ -18,7 +18,7 @@ class Solution
         // Your code here
         // return ffs(n);
         
-        
+        return log2(n& (~(n-1)))+1;
     }
 };
 
