@@ -23,23 +23,46 @@ public:
         
         // return ans;
         
-        sort(nums.begin(), nums.end());
-        vector<int> ans;
-        int i=0;
-        int n= nums.size();
-        while(i+1<n){
-            if(nums[i]==nums[i+1]){
-                i+= 2;
+        // sort(nums.begin(), nums.end());
+        // vector<int> ans;
+        // int i=0;
+        // int n= nums.size();
+        // while(i+1<n){
+        //     if(nums[i]==nums[i+1]){
+        //         i+= 2;
+        //     }else{
+        //         ans.push_back(nums[i]);
+        //         i++;
+        //     }
+        // }
+        
+        // if(nums[n-1]!= nums[n-2])
+        // ans.push_back(nums[i]);
+        
+        // return ans;
+        
+        long long int axor= 0;
+        for(auto num: nums)
+        axor^= num;
+        
+        //to get last set bit---
+        axor&= -axor;
+        
+        vector<int> ans= {0,0};
+        
+        for(auto num: nums){
+            if(axor& num){
+                ans[0]^= num;
             }else{
-                ans.push_back(nums[i]);
-                i++;
+                ans[1]^= num;
             }
         }
         
-        if(nums[n-1]!= nums[n-2])
-        ans.push_back(nums[i]);
-        
+        if(ans[0]>ans[1])
+        swap(ans[0],ans[1]);
         return ans;
+        
+        
     }
 };
 
