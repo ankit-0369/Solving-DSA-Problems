@@ -129,13 +129,51 @@ bool solve(Node* root, int val, vector<int>& path){
     return false;
     
 }
+
+bool dfs(Node* root, int k, int n, int & cnt, int &ans ){
+    if(!root) return false;
+    
+    if(root->data==n){
+        cnt++;
+        return true;
+    }
+    
+    bool left= dfs(root->left, k,n,cnt, ans);
+    if(left){
+        
+        if(cnt==k){
+            ans= root->data;
+        }
+         cnt++;
+        
+        return true;
+    }
+    
+    bool right= dfs(root->right, k, n, cnt, ans);
+    if(right){
+         
+        if(cnt==k){
+            ans= root->data;
+        }
+        cnt++;
+        return true;
+    }
+    
+    return false;
+}
 int kthAncestor(Node *root, int k, int node)
 {
     // Code here---
-    vector<int> path;
-    solve(root, node,path);
-    if(k>=path.size()){
-        return -1;
-    }
-    return path[k];
+    // vector<int> path;
+    // solve(root, node,path);
+    // if(k>=path.size()){
+    //     return -1;
+    // }
+    // return path[k];
+    
+    int ans= -1;//default
+    int cnt=0;
+    dfs(root, k,node,cnt,ans);
+    
+    return ans;
 }
