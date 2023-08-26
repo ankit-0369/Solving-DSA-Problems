@@ -62,7 +62,16 @@ bool search(Node* root, int x) {
         return false;
     }
     
-    bool left= search(root->left, x);
-    bool right= search(root->right, x);
-    return (root->data==x  || left || right);
+    if(root->data==x){
+        return true;
+    }
+    
+    if(x<root->data){
+        return search(root->left, x);
+    }
+    
+    return search(root->right,x);
+    // bool left= search(root->left, x);
+    // bool right= search(root->right, x);
+    // return (root->data==x  || left || right);
 }
