@@ -104,21 +104,36 @@ int main() {
 void solve(Node* root, int x, int & ans){
     if(!root)
     return;
-    solve(root->left, x, ans);
-    if(x<=root->data && ans== -1){
+      
+    if(root->data==x){
         ans= root->data;
-       
         return;
+    }else if(root->data<x){
+        solve(root->right, x, ans);
+    }else{
+        ans= root->data;
+        solve(root->left,x,ans);
     }
-    solve(root->right,x, ans);
 }
 
-int findCeil(Node* root, int input) {
+int findCeil(Node* root, int key) {
     if (root == NULL) return -1;
     int ans= -1;
-    solve(root, input, ans);
+    solve(root, key, ans);
     return ans;
-
-    // Your code here
+       
+        // while(root){
+        //     if(root->data== key){
+        //         return root->data;
+        //     }else if(root->data<key){
+        //         root= root->right;
+        //     }else{
+        //         ans= root->data;
+        //         root= root->left;
+        //     }
+            
+        // }
+        
+        // return ans;
     
 }
