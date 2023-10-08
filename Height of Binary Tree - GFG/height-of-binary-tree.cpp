@@ -98,7 +98,7 @@ struct Node
 */
 class Solution{
     public:
-    
+    //Function to find the height of a binary tree.
      int solve(Node* root){
         if(root==NULL) return 0;
         if(root->left==NULL && root->right==NULL)
@@ -111,6 +111,9 @@ class Solution{
         //using recursion---
          return solve(root);
     }
+    // int height(struct Node* node){
+    //     // code here 
+    // }
 };
 
 //{ Driver Code Starts.
