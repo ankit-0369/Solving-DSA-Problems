@@ -101,53 +101,35 @@ struct Node
 };
  */
 
+pair<bool, int> solve(Node* root){
+    if(!root){
+        return {true, 0};
+    }
+    
+    pair<bool, int> left= solve(root->left);
+    pair<bool, int> right= solve(root->right);
+    pair<bool, int> ans;
+    
+    if(left.first && right.first && abs(left.second-right.second)<=1 ){
+        ans.first= true;
+    }else{
+        ans.first= false;
+    }
+    
+    ans.second= max(left.second, right.second)+1;
+    
+    return ans;
+}
+
 class Solution{
-    private:
-    int height(Node* root){
-        if(!root) return 0;
-        
-        return max(height(root->left),height(root->right)) +1;
-    }
     public:
-    
-    pair<bool,int> solve(Node* root){
-        if(!root)
-        return {true,0};
-        pair<bool,int> left= solve(root->left);
-        pair<bool, int> right= solve(root->right);
-        
-        pair<bool,int> p;
-        p.first=  (left.first && right.first && abs(left.second-right.second)<=1);
-        p.second= max(left.second, right.second ) + 1;
-        
-        return p;
-        
-    }
-    
     //Function to check whether a binary tree is balanced or not.
     bool isBalanced(Node *root)
     {
         //  Your Code here---
-        //naive approach---use height fun to find height at each level then do as --
-        
-        // if(!root) return true;
-        
-        // bool leftCheck= isBalanced(root->left);
-        // bool rightCheck= isBalanced(root->right);
-        
-        
-        // int leftH= height(root->left);
-        // int rightH= height(root->right);
-        
-        // if( leftCheck && rightCheck && abs(leftH- rightH)<=1)
-        // {
-        //     return true;
-        // }
-        
-        // return false;
-        
-        pair<bool,int> ans= solve(root);
+        pair<bool, int> ans= solve(root);
         return ans.first;
+    
     }
 };
 
