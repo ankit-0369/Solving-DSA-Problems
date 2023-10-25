@@ -9,6 +9,7 @@ public:
         for(int i=s; i<e; i++){
             int cur= nums[i];
             if(i>s+1) cur+= prev2;
+            cur= max(cur, prev1);
             prev2= prev1;
             prev1= cur;
             
@@ -34,18 +35,18 @@ public:
     int rob(vector<int>& nums) {
         
             if(nums.size()==1) return nums[0];
-//         int ansWithoutLast= solve(nums, false);
+        int ansWithoutLast= solve(nums, false);
        
-//         int ansWithLast= solve(nums, true);
-//         return max(ansWithLast, ansWithoutLast);
-        int n=nums.size();
-        vector<int> temp1, temp2;
-        for(int i=0; i<n; i++)
-        {
-            if(i!=0) temp1.push_back(nums[i]);
-            if(i!=n-1) temp2.push_back(nums[i]);
-        }
+        int ansWithLast= solve(nums, true);
+        return max(ansWithLast, ansWithoutLast);
+//         int n=nums.size();
+//         vector<int> temp1, temp2;
+//         for(int i=0; i<n; i++)
+//         {
+//             if(i!=0) temp1.push_back(nums[i]);
+//             if(i!=n-1) temp2.push_back(nums[i]);
+//         }
         
-        return max(maxSum(temp1), maxSum(temp2));
+//         return max(maxSum(temp1), maxSum(temp2));
     }
 };
