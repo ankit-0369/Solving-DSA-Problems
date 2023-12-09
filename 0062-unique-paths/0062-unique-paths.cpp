@@ -65,19 +65,30 @@ public:
         // vector<vector<int>> memo(m, vector<int>(n,-1));
 
     //     return totalPaths(0,0, m,n, memo);
-        vector<int> prev(n,0);
-        for(int i=0; i<m; i++){
-            vector<int> temp(n, 0);
-            for(int j=0 ; j<n; j++){
-                if(i==0 || j==0) temp[j]=1;
-                else{
+//         vector<int> prev(n,0);
+//         for(int i=0; i<m; i++){
+//             vector<int> temp(n, 0);
+//             for(int j=0 ; j<n; j++){
+//                 if(i==0 || j==0) temp[j]=1;
+//                 else{
 
-                    temp[j]= prev[j] + temp[j-1];
-                }
+//                     temp[j]= prev[j] + temp[j-1];
+//                 }
 
-            }
-            prev= temp;
+//             }
+//             prev= temp;
+//         }
+//         return prev[n-1];
+        
+        //using combinatorics---
+        int N= m+n-2;
+        int r= min(m-1, n-1);
+        double res=1;
+        for(int i=1; i<=r; i++)
+        {
+            res= res* (N-r+i)/i;
         }
-        return prev[n-1];
+        
+        return (int)res;
     }
 };
