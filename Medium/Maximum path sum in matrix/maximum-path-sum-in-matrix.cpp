@@ -26,15 +26,40 @@ public:
     int maximumPath(int n, vector<vector<int>> mat)
     {
         // code here----
-        int maxSum= -1e9;
-        vector<vector<int>> memo(n, vector<int>(n,-1));
-        for(int i=0; i<n; i++){
-            maxSum= max(maxSum, solve(n-1, i,n, mat, memo));
-            memo[n-1][i]= maxSum;
+        // int maxSum= -1e9;
+        // vector<vector<int>> memo(n, vector<int>(n,-1));
+        // for(int i=0; i<n; i++){
+        //     maxSum= max(maxSum, solve(n-1, i,n, mat, memo));
+        //     memo[n-1][i]= maxSum;
+        // }
+        
+        // return maxSum;
+        
+        vector<vector<int> > dp(n, vector<int>(n,0));
+        for(int i=0; i<n; i++)
+        dp[0][i]= mat[0][i];
+        
+        for(int i=1; i<n; i++){
+            
+            for(int j=0; j<n; j++){
+                
+                 int l= -1e8, r= -1e8, s= -1e8;
+                 if(j-1>=0) l= dp[i-1][j-1];
+                 if(j+1<n) r= dp[i-1][j+1];
+                 s= dp[i-1][j];
+                 dp[i][j]= max(s, max(l,r))+mat[i][j];
+        
+            }
         }
-        
-        return maxSum;
-        
+        int ans= -1e9;
+        for(int j=0; j<n; j++){
+            
+            ans= max(ans, dp[n-1][j]);
+          
+        }
+
+        return ans;
+    
     }
 };
 
