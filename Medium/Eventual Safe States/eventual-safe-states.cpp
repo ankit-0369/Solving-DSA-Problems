@@ -10,40 +10,44 @@ using namespace std;
 
 class Solution {
   public:
-    vector<int> eventualSafeNodes(int V, vector<int> al[]) {
-        // code here---
-         vector<int> adjRev[V];
-       int indegree[V] = {0};
-       for(int i=0;i<V;i++){
-           for(auto it:al[i])
-           {
-               adjRev[it].push_back(i);
-               indegree[i]++;
-           }
-       }
-       vector<int>ans;
-       queue<int>q;
-       
-       for(int i=0;i<V;i++){
-           if(indegree[i]==0)
-           q.push(i);
-       }
-       
-       while(!q.empty())
-       {
-           int node=q.front();
-           q.pop();
-           ans.push_back(node);
-           for(auto nbr:adjRev[node])
-           {
-               indegree[nbr]--;
-               
-               if(indegree[nbr]==0)
-               q.push(nbr);
-           }
-       }
-         sort(ans.begin(), ans.end());
-         return ans;
+  
+  bool dfsCall(int node, int path[], int vis[], int check[], vector<int> adj[]){
+      
+      path[node]= 1;
+      vis[node]=1;
+      check[node]= 0;
+      for(auto neigh: adj[node]){
+          
+          if(!vis[neigh]){
+             bool call=  dfsCall(neigh, path, vis, check, adj);
+          
+              if(call) return true;
+          }else if(path[neigh] == 1) return true;
+      }
+      
+      path[node]= 0;
+      check[node]= 1;
+      return false;
+  }
+  
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // code here----
+        int vis[V]= {0};
+        int path[V]= {0};
+        int check[V]= {0};
+        
+        for(int i=0; i<V; i++){
+            
+            if(!vis[i])
+                dfsCall(i, path, vis, check, adj);
+        }
+        
+        vector<int> ans;
+        for(int i=0; i<V; i++){
+            if(check[i]) ans.push_back(i);
+        }
+        return ans;
+        
     }
 };
 
