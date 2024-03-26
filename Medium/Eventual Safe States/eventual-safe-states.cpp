@@ -10,43 +10,36 @@ using namespace std;
 
 class Solution {
   public:
-  
-  bool dfsCall(int node, int path[], int vis[], int check[], vector<int> adj[]){
-      
-      path[node]= 1;
-      vis[node]=1;
-      check[node]= 0;
-      for(auto neigh: adj[node]){
-          
-          if(!vis[neigh]){
-             bool call=  dfsCall(neigh, path, vis, check, adj);
-          
-              if(call) return true;
-          }else if(path[neigh] == 1) return true;
-      }
-      
-      path[node]= 0;
-      check[node]= 1;
-      return false;
-  }
-  
     vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
-        // code here----
-        int vis[V]= {0};
-        int path[V]= {0};
-        int check[V]= {0};
+        // code here---
+        vector<int> adjRev[V];
         
-        for(int i=0; i<V; i++){
+        int indeg[V]= {0};
+        for(int node= 0; node<V; node++){
             
-            if(!vis[i])
-                dfsCall(i, path, vis, check, adj);
+            for(auto neigh: adj[node]){
+                    //node-----> neigh we need to reverse the dirn-
+                    adjRev[neigh].push_back(node);
+                    indeg[node]++;
+            }
+        }
+        queue<int> q;
+        
+        for(int i=0; i<V; i++) if(indeg[i] == 0) q.push(i);
+        vector<int> ans;
+        while(!q.empty()){
+            int node= q.front();
+            q.pop();
+            ans.push_back(node);
+            for(auto neigh: adjRev[node]){
+                indeg[neigh]--;
+                if(indeg[neigh] == 0) q.push(neigh);
+            }
         }
         
-        vector<int> ans;
-        for(int i=0; i<V; i++){
-            if(check[i]) ans.push_back(i);
-        }
+        sort(ans.begin(), ans.end());
         return ans;
+        
         
     }
 };
